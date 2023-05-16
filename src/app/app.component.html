@@ -1,11 +1,16 @@
-
-<div *ngIf = "breedImage">
-  <img [src]="breedImage" />
+<div class="container">
+  <h1 class="title">BREEDS LIST</h1>
+  <div>
+    <span class="breed-selection">
+      https://dog.ceo/api/breed/
+      <select name="pets" id="pet-select" class="select" (change)="setBreedType($event)">
+        <option *ngFor="let breed of breeds" [value]="breed"> {{breed}} </option>
+      </select>
+      /images/random
+    </span>
+    <button class="fetch-btn" (click)="fetch(breedType)">Fetch</button>
+  </div>
+  <div *ngIf = "breedImage" class="breed-image-wrapper">
+    <img [src]="breedImage" class="breed-image"/>
+  </div>
 </div>
-
-<div>
-    <ul *ngIf="breeds.length > 0">
-      <li *ngFor="let breed of breeds" (click)="showImage(breed)"> {{breed}} </li>
-    </ul>
-</div>
-

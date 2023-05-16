@@ -10,6 +10,7 @@ export class AppComponent implements OnInit  {
   title = 'dogs-breeds';
   breeds: string[] = [];
   breedImage: string = '';
+  breedType: string = '';
 
   constructor(private apiService: ApiService){ }
   
@@ -35,9 +36,12 @@ export class AppComponent implements OnInit  {
     }
   }
 
-  showImage(breed: string){
-    let image_api_url = '';
+  setBreedType(event: any){
+    this.breedType = event.target.value;
+  }
 
+  fetch(breed: string) {
+    let image_api_url = '';
     if (breed.indexOf('-') === -1) {
       image_api_url = `https://dog.ceo/api/breed/${breed}/images/random`;
     } else {
