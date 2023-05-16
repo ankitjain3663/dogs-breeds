@@ -1,0 +1,11 @@
+
+<div *ngIf = "breedImage">
+  <img [src]="breedImage" />
+</div>
+
+<div>
+    <ul *ngIf="breeds.length > 0">
+      <li *ngFor="let breed of breeds" (click)="showImage(breed)"> {{breed}} </li>
+    </ul>
+</div>
+
