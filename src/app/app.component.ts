@@ -9,6 +9,7 @@ import { ApiService } from 'src/services/api.service';
 export class AppComponent implements OnInit  {
   title = 'dogs-breeds';
   breeds: string[] = [];
+  breedImage: string = '';
 
   constructor(private apiService: ApiService){ }
   
@@ -34,4 +35,20 @@ export class AppComponent implements OnInit  {
     }
   }
 
+  showImage(breed: string){
+    let image_api_url = '';
+
+    if (breed.indexOf('-') === -1) {
+      image_api_url = `https://dog.ceo/api/breed/${breed}/images/random`;
+    } else {
+      const breed_types = breed.split('-');
+      image_api_url = `https://dog.ceo/api/breed/${breed_types[0].trim()}/${breed_types[1].trim()}/images/random`;
+    }
+
+    this.apiService.getBreedImage(image_api_url).subscribe((resp) => {
+      if(resp.status === 'success') {
+        this.breedImage = resp.message;
+      }
+    })
+  }
 }
